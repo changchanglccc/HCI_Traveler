@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Traveler</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+    
+
+    <!-- Template styles -->
+    <style>
+        /* TEMPLATE STYLES */
+
+        html,
+        body,
+        .view {
+            height: 100%;
+        }
+
+        /* Navigation*/
+
+        .navbar {
+            background-color: transparent;
+        }
+
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+
+        .top-nav-collapse {
+            background-color: #1C2331;
+        }
+
+        footer.page-footer {
+            background-color: #1C2331;
+            margin-top: 2rem;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #1C2331;
+            }
+        }
+
+        /*Call to action*/
+
+        .flex-center {
+            color: #fff;
+        }
+
+        .view {
+            background: url("https://static.pexels.com/photos/8746/prague.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        /*Contact section*/
+
+        #contact .fa {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1C2331;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<!--Navbar-->
+
+<!--/.Navbar-->
+
+<!--Mask-->
+<div class="view hm-black-strong">
+    <div class="full-bg-img flex-center">
+            
+            <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+            <ul>            
+                <li>
+                    <h1 class="h1-responsive wow fadeInDown" data-wow-delay="0.2s" >Welcome to the Traveler</h1></li>
+                <li>
+                    <p class="wow fadeInDown" >A Virtual Tour Guide</p>
+                </li>
+            </ul>
+            
+            <ul>
+                <li>
+                    <BR>
+                    <BR>
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <span class="btn btn-primary btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Change</span>         
+                        <span> <input type="file" name="userPhoto" /></span>
+                        <span class="fileupload-preview"></span>
+
+                    </div>
+                     <input class="waves-effect waves-light btn" style="background-color: #00E676" id="submitButtoncd" type="submit" value="Upload" name="submit" />
+                </li>
+                
+                <BR></BR>
+                <BR></BR>
+                <BR></BR>
+                <BR></BR>
+
+                <li>
+                     <div class="flex-center">
+                         <input type="image" class="wow fadeInUp" src="http://www.orthodoxasten.nl/images/speaker.png"
+                            style="width:90px;height:90px;" onclick="speak()">
+                    </div>
+                </li>
+                <li>
+                    <div>Press to read</div>
+                </li>
+                           
+                    <li>
+                        <h1 id = "title" style="color: white;" class="h1-responsive wow fadeInDown" data-wow-delay="0.2s" >Nothing uploaded</h1>
+                    </li>
+                    <li>
+                        <p class="wow fadeInDown" id = "status">No content to display</p>
+                    </li>
+
+            </ul>
+            </form>            
+           
+    </div>
+
+            
+</div>
+
+
+
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/tether.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+
+<script>
+    function speak(){
+        if(document.getElementById("status").innerHTML == null)
+          alert("Please upload an image first");
+            else
+            VoiceRSS.speech({
+                key: 'b49727a235b54b15a7b22955f9fbd2d6',
+                src: document.getElementById('status').innerHTML,
+                hl: 'en-us',
+                r: 0, 
+                c: 'mp3',
+                f: '44khz_16bit_stereo',
+                ssml: false
+            });     
+      }; 
+    
+
+  $(document).ready(function() {
+        $('#uploadForm').submit(function() {
+	        $("#title").empty().text("Nothing is found yet...");
+            $("#status").empty().text("File is uploading...");
+            $(this).ajaxSubmit({
+                error: function(xhr) {
+		                status('Error: ' + xhr.status);
+                },
+                success: function(response) {
+					
+                    //console.log(response)
+					var jsonresp = JSON.parse(response);
+                    //console.log(jsonresp)
+                    $("#title").empty().text(jsonresp.place);
+                    $("#status").empty().text(jsonresp.description);
+                }
+            });
+            return false;
+        });    
+    });
+  </script>
+
+
+
+
+<!-- Animations init-->
+<script>
+    new WOW().init();
+</script>
+
+
+</body>
+
+</html>
