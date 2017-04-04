@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+
+
     <title>Traveler</title>
 
     <!-- Font Awesome -->
@@ -20,7 +22,9 @@
     <link rel="stylesheet" href="css/style.css">
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
-    
+
+    <!--JENNY-->
+    <link rel="stylesheet" href="css/animate.css">
 
     <!-- Template styles -->
     <style>
@@ -80,6 +84,10 @@
             margin-bottom: 1rem;
             color: #1C2331;
         }
+
+        div .scrolling{
+            overflow: scroll;
+        }
     </style>
 
 </head>
@@ -114,7 +122,7 @@
                         <span class="fileupload-exists">Change</span>         
                         <span> <input type="file" name="userPhoto" /></span>
                         <span class="fileupload-preview"></span>
-
+                        </span>
                     </div>
                      <input class="waves-effect waves-light btn" style="background-color: #00E676" id="submitButtoncd" type="submit" value="Upload" name="submit" />
                 </li>
@@ -123,6 +131,9 @@
                 <BR></BR>
                 <BR></BR>
                 <BR></BR>
+                <li>
+                    <div>Press to read it out</div>
+                </li>
 
                 <li>
                      <div class="flex-center">
@@ -130,16 +141,16 @@
                             style="width:90px;height:90px;" onclick="speak()">
                     </div>
                 </li>
-                <li>
-                    <div>Press to read</div>
-                </li>
-                           
-                    <li>
+
+                    <li class="scrolling">
                         <h1 id = "title" style="color: white;" class="h1-responsive wow fadeInDown" data-wow-delay="0.2s" >Nothing uploaded</h1>
                     </li>
-                    <li>
+
+                    <li class="scrolling">
                         <p class="wow fadeInDown" id = "status">No content to display</p>
                     </li>
+
+
 
             </ul>
             </form>            
@@ -150,7 +161,9 @@
 </div>
 
 
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src='./js/voicerss-tts.min.js'></script>
 
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="js/tether.min.js"></script>
