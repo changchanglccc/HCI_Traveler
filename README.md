@@ -8,4 +8,4 @@ It will be implemented on web pages which adapts to handheld mobile devices like
 2) Backend: Node.js
  Training the model of image identification based on appropriate API from https://www.clarifai.com.
  Crawling relative information and return it on the screen of frontend.
- Audio part: read information out for users.
+ Audio part: read information out for users： Voice RSS
