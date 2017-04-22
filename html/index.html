@@ -8,6 +8,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script src='./js/voicerss-tts.min.js'></script>
 
     <title>Traveler</title>
 
@@ -139,6 +142,7 @@
                      <div class="flex-center">
                          <input type="image" class="wow fadeInUp" src="http://www.orthodoxasten.nl/images/speaker.png"
                             style="width:90px;height:90px;" onclick="speak()">
+                         <!--onclick="speak()"-->
                     </div>
                 </li>
 
@@ -159,10 +163,6 @@
 </div>
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-<script src='./js/voicerss-tts.min.js'></script>
-
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="js/tether.min.js"></script>
 
@@ -173,7 +173,9 @@
 <script type="text/javascript" src="js/mdb.min.js"></script>
 
 <script>
+
     function speak(){
+
         if(document.getElementById("status").innerHTML == null)
           alert("Please upload an image first");
             else

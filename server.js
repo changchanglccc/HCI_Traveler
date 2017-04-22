@@ -8,11 +8,8 @@ var app = express();
 var Clarifai = require('clarifai');
 
 var clarifai_app = new Clarifai.App(
-    //'ZZA7X0xCEKGj8ccJhHcHe9btVdeR-I-7aPVBR6b-X',
-    //'Vb5z6QJvd7zN7ENZZyCNuqUF64oemuMQf2bTbPix'
-    '86zP6be-eJBwZk9liTtpvApSVRFBjv5hGA9yI9mQ',
-    'M7VeWjDo2E6_5sMuSJI9IeWjdr72MRxPBwgOqnjh'
-
+    'ZA7X0xCEKGj8ccJhHcHe9btVdeR-I-7aPVBR6b-X',
+    'Vb5z6QJvd7zN7ENZZyCNuqUF64oemuMQf2bTbPix'
 );
 
 var storage;
@@ -33,6 +30,8 @@ var hashMap = {
     Contains : function(key){return this.Get(key) == null?false:true},
     Remove : function(key){delete this[key]}
 }
+
+
 hashMap.Set("Biodome Montreal","The Montreal Biodome is a facility located at Olympic Park in the Montreal neighbourhood of Mercier–Hochelaga-Maisonneuve that allows visitors to walk through replicas of four ecosystems found in the Americas. The building was originally constructed for the 1976 Olympic Games as a velodrome. It hosted both track cycling and judo events. Renovations on the building began in 1989 and in 1992 the indoor nature exhibit was opened.The Montreal Biodome is one of four facilities that make part of the largest natural science museum complex in Canada, Space for Life, which also includes the Montreal Insectarium, Montreal Botanical Garden, and Rio Tinto Alcan Planetarium.[6] It is an accredited member of both the Association of Zoos and Aquariums (AZA) and the Canadian Association of Zoos and Aquariums (CAZA)");
 hashMap.Set("EV Building","The Engineering, Computer Science and Visual Arts Integrated Complex (EV Building) opened in September 2005, a striking addition to Montreal’s downtown landscape. The two towers of the high-tech complex are completely integrated with links at every floor and a common corridor. The 17-storey Engineering and Computer Science tower houses research and graduate teaching labs, administrative offices, and the Dean’s Office. From the many disparate locations in which it was previously housed, this tower integrates a large part of the Faculty in a single space, fostering more effective interaction of researchers. Facilities include over 300 specialized labs, conference and meeting rooms, and student areas.");
 hashMap.Set("Henry F. Hall Building","The Henry F. Hall Building is a high-density hub of Concordia’s downtown campus. It is a utilitarian, cube-shaped, 1960s-style high-rise university building made of pre-fabricated stressed concrete. Most Social Sciences academic departments are concentrated in the Hall Building, along with engineering teaching and research labs, The D.B. Clarke Theatre, classrooms and student space. ");
@@ -63,14 +62,14 @@ app.post('/api/photo', function (req, res) {
             var base64Image = original_data.toString('base64');
             // console.log(base64Image);
 
-            clarifai_app.models.predict("alpha", {base64: base64Image}).then(
+            clarifai_app.models.predict("beta", {base64: base64Image}).then(
                 function (response) {
                     var itemName = response.data.outputs[0].data.concepts[0];
 
                     var str = itemName.name;
                     console.log(str);
                     var adjustedName = itemName.name[0].toUpperCase();
-
+                    /* 4-22
                     var final_text = hashMap.Get(str);
 
                     var final_result = {};
@@ -78,9 +77,8 @@ app.post('/api/photo', function (req, res) {
                     final_result["description"] = final_text;
                     fs.unlinkSync(filePath);
                     res.end(JSON.stringify(final_result));
+                    */
 
-
-                    /* 4-8 fix
                     for (var i = 1, len = str.length; i < len; i++) {
                         if (i > 0 && str.charAt(i - 1) == ' ' && i > 0 && str.charAt(i - 1) != 'a' && str.charAt(i) != 'l') {
                             adjustedName += str[i].toUpperCase();
@@ -122,7 +120,7 @@ app.post('/api/photo', function (req, res) {
                             fs.unlinkSync(filePath);
                             res.end(JSON.stringify(final_result));
                         });
-                    });*/
+                    });
 
                 },
                 // predict function error
